@@ -2,7 +2,7 @@
 1) Install Tampermonkey on your browser.
 2) Click on Tampermonkey logo and go to Dashboard.
 3) Go to Utilities tab.
-4) Paste [THIS URL](https://raw.githubusercontent.com/erfanva/Tools/master/VEED.io%20Sub%20downloader.js) at "Install from URL" field and click on "Install" button.
+4) Paste this url at "Install from URL" field and click on "Install" button.
 ```
 https://raw.githubusercontent.com/erfanva/Tools/master/VEED.io%20Sub%20downloader.js
 ```
