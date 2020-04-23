@@ -38,8 +38,7 @@
             a.dispatchEvent(e)
         }
     })(console)
-
-
+    
     let interval1, interval2
     function extract(container) {
         console.log('extract')
@@ -96,4 +95,5 @@
             })
         }
     }, 1000)
+    
 })();
