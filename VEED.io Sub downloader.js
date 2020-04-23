@@ -85,7 +85,6 @@
         })
     }
 
-    console.log('start')
     interval1 = setInterval(() => {
         let container = document.querySelector('div.subtitle-rows-list')
         if (container) {
