@@ -53,7 +53,6 @@
                 if (count2++ > 600 || container.scrollTop + container.clientHeight >= container.scrollHeight) {
                     clearInterval(interval2)
                     // resolve(subs)
-                    console.save(subStr, 'sub.srt')
                     resolve(subStr)
                 }
                 const subsTemp = container.querySelectorAll('div[data-testid]')
@@ -65,7 +64,7 @@
                         if (from.split(':').length < 3) {
                             from = '00:' + from
                         }
-                        let to = times[1].value.split('.', ',') + '00'
+                        let to = times[1].value.replace('.', ',') + '00'
                         if (to.split(':').length < 3) {
                             to = '00:' + to
                         }
@@ -93,7 +92,7 @@
         if (container) {
             clearInterval(interval1)
             extract(container).then((subs) => {
-                console.log(subs)
+                console.save(subs)
             })
         }
     }, 1000)
