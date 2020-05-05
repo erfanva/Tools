@@ -1,4 +1,4 @@
-## VEED.io Sub downloader (how to use)
+## VEED.io Sub downloader
 This script help you to free download auto generated VEED.io subtitles.
 1) Install Tampermonkey on your browser.
 2) Click on Tampermonkey logo and go to Dashboard.
