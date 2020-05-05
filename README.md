@@ -15,7 +15,7 @@ This script find ldjson product objects in page and log them in console.
 3) Go to Utilities tab.
 4) Paste this url at "Install from URL" field and click on "Install" button.
 ```
-https://github.com/erfanva/Tools/raw/master/LDJSON%20Product%20Scripting%20helper
+https://github.com/erfanva/Tools/raw/master/LDJSON%20Product%20Scripting%20helper.js
 ```
 ## Common Images finder
 This script find 4 common image selector in page and then copy the selector in clipboard for you:)
