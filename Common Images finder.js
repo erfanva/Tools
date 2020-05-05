@@ -3,7 +3,7 @@
 // @namespace    https://github.com/erfanva/
 // @version      0.1
 // @description  try to take over the world!
-// @author       You
+// @author       erfanva
 // @match        *
 // @grant        none
 // ==/UserScript==
@@ -39,5 +39,4 @@
         document.execCommand("copy");
     }
 
-    // Your code here...
 })();
