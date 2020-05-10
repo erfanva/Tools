@@ -6,7 +6,7 @@
 // @author       erfanva
 // @match        *://*/*
 // @grant        none
-// @updateURL    https://github.com/erfanva/Tools/raw/master/Common Images finder.js
+// @updateURL    https://github.com/erfanva/Tools/raw/master/Common%20Images%20finder.js
 // ==/UserScript==
 
 (function() {
