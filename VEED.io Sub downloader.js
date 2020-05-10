@@ -6,6 +6,7 @@
 // @author       erfanva
 // @match        https://www.veed.io/*
 // @grant        none
+// @updateURL    https://github.com/erfanva/Tools/raw/master/VEED.io%20Sub%20downloader.js
 // ==/UserScript==
 
 (function () {
