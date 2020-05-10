@@ -6,6 +6,7 @@
 // @author       erfanva
 // @match        *://*/*
 // @grant        none
+// @updateURL    https://github.com/erfanva/Tools/raw/master/LDJSON%20Product%20Scripting%20helper.js
 // ==/UserScript==
 
 (function() {
