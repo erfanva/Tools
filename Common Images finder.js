@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         Common Images finder
 // @namespace    https://github.com/erfanva/
-// @version      0.1
+// @version      0.15
 // @description  try to take over the world!
 // @author       erfanva
 // @match        *://*/*
 // @grant        none
+// @updateURL    https://github.com/erfanva/Tools/raw/master/Common Images finder.js
 // ==/UserScript==
 
 (function() {
