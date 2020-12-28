@@ -7,6 +7,8 @@
 // @match        *://elearn.ut.ac.ir/*
 // @match        *://elearn1.ut.ac.ir/*
 // @match        *://elearn2.ut.ac.ir/*
+// @match        *://elearn3.ut.ac.ir/*
+// @match        *://elearn4.ut.ac.ir/*
 // @updateURL    https://github.com/erfanva/Tools/raw/master/UT_Elearn_calendar_fixer.js
 // @run-at document-end
 // @grant        none
