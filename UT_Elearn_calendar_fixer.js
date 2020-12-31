@@ -18,7 +18,7 @@
     'use strict';
     let done = {}
     // version
-    const CF_VER = 0.25
+    const CF_VER = 0.35
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
     console.log(user)
 
