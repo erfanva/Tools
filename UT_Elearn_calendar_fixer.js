@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.23
+// @version      0.24
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -16,14 +16,6 @@
 
 (function () {
     'use strict';
-    function extractTextWithoutTags(elem) {
-        if (!elem) {
-            return null;
-        }
-        return Array.prototype.reduce.call(elem.childNodes, function (a, b) {
-            return a + (b.nodeType === 3 ? b.textContent : '');
-        }, '').trim();
-    }
     let done = {}
 
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
@@ -41,16 +33,21 @@
             if (courses && courses.length && !done.calendar) {
                 let tries = 0
                 let intervalID = setInterval(() => {
+                    if (done.calendar) return
                     let objs = document.querySelectorAll('table.minicalendar div[data-popover-eventtype-course]')
+                    // wait
                     if (document.querySelector('div.calendarwrapper :not(.hidden) .loading-icon')) {
                         return
+                    }
+                    if (objs.length || ++tries > 60) {
+                        done.calendar = objs.length
+                        clearInterval(intervalID)
                     }
                     objs.forEach(elem => {
                         const text = elem.innerText
                         const parent = elem.parentElement.parentElement
                         let c = courses.find(t => text.includes(t.shortname))
                         if (!c) {
-                            console.log(text)
                             elem.remove()
                             if (!parent.querySelector('div[data-popover-eventtype-course]')) {
                                 parent.classList = ['day', 'text-center']
@@ -60,17 +57,18 @@
                         }
                         elem.innerHTML = elem.innerHTML.replace(c.shortname, c.fullname)
                     })
-                    if (objs.length || ++tries > 60) {
-                        done.calendar = objs.length
-                        clearInterval(intervalID)
-                    }
                 })
             }
             // Timeline
             if (courses && courses.length && !done.timeline) {
                 let tries = 0
                 let intervalID = setInterval(() => {
+                    if (done.timeline) return
                     let objs = document.querySelectorAll('div[data-region="event-list-item"]')
+                    if (objs.length || ++tries > 60) {
+                        done.timeline = objs.length
+                        clearInterval(intervalID)
+                    }
                     objs.forEach(elem => {
                         const text = (elem.querySelector('.text-truncate') || {}).innerText;
                         const parent = elem.parentElement
@@ -85,10 +83,6 @@
                             return
                         }
                     })
-                    if (objs.length || ++tries > 60) {
-                        done.timeline = objs.length
-                        clearInterval(intervalID)
-                    }
                 }, 500)
             }
         }, false);
