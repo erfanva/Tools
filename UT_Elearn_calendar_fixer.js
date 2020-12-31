@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.22
+// @version      0.23
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -42,7 +42,7 @@
                 let tries = 0
                 let intervalID = setInterval(() => {
                     let objs = document.querySelectorAll('table.minicalendar div[data-popover-eventtype-course]')
-                    if (document.querySelector('div.calendarwrapper .loading-icon')) {
+                    if (document.querySelector('div.calendarwrapper :not(.hidden) .loading-icon')) {
                         return
                     }
                     objs.forEach(elem => {
