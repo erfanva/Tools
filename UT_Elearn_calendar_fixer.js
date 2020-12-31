@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.20
+// @version      0.22
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -16,6 +16,14 @@
 
 (function () {
     'use strict';
+    function extractTextWithoutTags(elem) {
+        if (!elem) {
+            return null;
+        }
+        return Array.prototype.reduce.call(elem.childNodes, function (a, b) {
+            return a + (b.nodeType === 3 ? b.textContent : '');
+        }, '').trim();
+    }
     let done = {}
 
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
@@ -29,13 +37,14 @@
             else
                 courses = JSON.parse(localStorage.getItem("courses"))
 
-            let removed = JSON.parse(localStorage.getItem("removed_courses")) || []
-
             // calendar
             if (courses && courses.length && !done.calendar) {
                 let tries = 0
                 let intervalID = setInterval(() => {
                     let objs = document.querySelectorAll('table.minicalendar div[data-popover-eventtype-course]')
+                    if (document.querySelector('div.calendarwrapper .loading-icon')) {
+                        return
+                    }
                     objs.forEach(elem => {
                         const text = elem.innerText
                         const parent = elem.parentElement.parentElement
