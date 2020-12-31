@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.24
+// @version      0.30
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -47,7 +47,7 @@
                         const text = elem.innerText
                         const parent = elem.parentElement.parentElement
                         let c = courses.find(t => text.includes(t.shortname))
-                        if (!c) {
+                        if (!c || !c.hasprogress) {
                             elem.remove()
                             if (!parent.querySelector('div[data-popover-eventtype-course]')) {
                                 parent.classList = ['day', 'text-center']
@@ -74,7 +74,7 @@
                         const parent = elem.parentElement
                         if (!text) return;
                         let c = courses.find(t => text.includes(t.shortname))
-                        if (!c) {
+                        if (!c || !c.hasprogress) {
                             elem.remove()
                             if (!parent.querySelector('div[data-region="event-list-item"]')) {
                                 parent.previousElementSibling.remove()
