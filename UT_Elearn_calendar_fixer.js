@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.2
+// @version      0.20
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
