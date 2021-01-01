@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn calendar fixer
 // @namespace    https://github.com/erfanva/
-// @version      0.35
+// @version      0.36
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -18,7 +18,7 @@
     'use strict';
     let done = {}
     // version
-    const CF_VER = 0.35
+    const CF_VER = 0.36
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
     console.log(user)
 
