@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn tool
 // @namespace    https://github.com/erfanva/
-// @version      0.41
+// @version      0.42
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -18,9 +18,9 @@
     'use strict';
     let done = {}
     // config
-    const CF_VER = 0.41; // version
+    const CF_VER = 0.42; // version
     const INTERVAL_TIME = 300;
-    const MAX_TRIES = 100
+    const MAX_TRIES = 20
     // end-config
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
 
