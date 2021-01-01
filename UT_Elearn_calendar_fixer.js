@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn tool
 // @namespace    https://github.com/erfanva/
-// @version      0.40
+// @version      0.41
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -17,8 +17,11 @@
 (function () {
     'use strict';
     let done = {}
-    // version
-    const CF_VER = 0.40
+    // config
+    const CF_VER = 0.41; // version
+    const INTERVAL_TIME = 300;
+    const MAX_TRIES = 100
+    // end-config
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
 
     // check is updated or not
@@ -53,7 +56,7 @@
                     if (document.querySelector('div.calendarwrapper :not(.hidden) .loading-icon')) {
                         return
                     }
-                    if (objs.length || ++tries > 60) {
+                    if (objs.length || ++tries > MAX_TRIES) {
                         done.calendar = objs.length
                         clearInterval(intervalID)
                     }
@@ -71,7 +74,7 @@
                         }
                         elem.innerHTML = elem.innerHTML.replace(c.shortname, c.fullname)
                     })
-                })
+                }, INTERVAL_TIME)
             }
             // Timeline
             if (courses && courses.length && !done.timeline) {
@@ -79,7 +82,7 @@
                 let intervalID = setInterval(() => {
                     if (done.timeline) return
                     let objs = document.querySelectorAll('div[data-region="event-list-item"]')
-                    if (objs.length || ++tries > 60) {
+                    if (objs.length || ++tries > MAX_TRIES) {
                         done.timeline = objs.length
                         clearInterval(intervalID)
                     }
@@ -97,7 +100,7 @@
                             return
                         }
                     })
-                }, 500)
+                }, INTERVAL_TIME)
             }
             // Menu
             if (courses && courses.length && !done.menu) {
@@ -105,7 +108,7 @@
                 let intervalID = setInterval(() => {
                     if (done.timeline) return
                     let objs = document.querySelectorAll('#nav-drawer a[data-parent-key="mycourses"]')
-                    if (objs.length || ++tries > 60) {
+                    if (objs.length || ++tries > MAX_TRIES) {
                         done.menu = objs.length
                         clearInterval(intervalID)
                     }
@@ -128,7 +131,7 @@
                     TAs.forEach(elem => {
                         objs[0].parentElement.parentElement.insertBefore(elem, null)
                     })
-                }, 500)
+                }, INTERVAL_TIME)
             }
         }, false);
         this.realSend(value);
