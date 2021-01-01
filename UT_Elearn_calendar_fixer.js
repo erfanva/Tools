@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         UT Elearn calendar fixer
+// @name         UT Elearn tool
 // @namespace    https://github.com/erfanva/
-// @version      0.36
+// @version      0.40
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -18,9 +18,8 @@
     'use strict';
     let done = {}
     // version
-    const CF_VER = 0.36
+    const CF_VER = 0.40
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
-    console.log(user)
 
     // check is updated or not
     if (localStorage.getItem("calendar_fix_ver") != CF_VER) {
@@ -97,6 +96,37 @@
                             }
                             return
                         }
+                    })
+                }, 500)
+            }
+            // Menu
+            if (courses && courses.length && !done.menu) {
+                let tries = 0
+                let intervalID = setInterval(() => {
+                    if (done.timeline) return
+                    let objs = document.querySelectorAll('#nav-drawer a[data-parent-key="mycourses"]')
+                    if (objs.length || ++tries > 60) {
+                        done.menu = objs.length
+                        clearInterval(intervalID)
+                    }
+                    let TAs = []
+                    objs.forEach(elem => {
+                        const text = elem.innerText;
+                        const parent = elem.parentElement
+                        if (!text) return;
+                        let c = courses.find(t => text.includes(t.fullname))
+                        if (!c) {
+                            parent.remove()
+                            return
+                        }
+                        if (!c.hasprogress) {
+                            elem.style.color = "var(--success)"
+                            TAs.push(parent)
+                            //parent.remove()
+                        }
+                    })
+                    TAs.forEach(elem => {
+                        objs[0].parentElement.parentElement.insertBefore(elem, null)
                     })
                 }, 500)
             }
