@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn tool
 // @namespace    https://github.com/erfanva/
-// @version      0.45
+// @version      0.46
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -21,7 +21,7 @@
     'use strict';
     let done = {}
     // config
-    const CF_VER = 0.43; // version
+    const CF_VER = 0.46; // version
     const INTERVAL_TIME = 200;
     const MAX_TRIES = 10
     // end-config
