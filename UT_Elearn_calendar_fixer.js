@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         UT Elearn tool
 // @namespace    https://github.com/erfanva/
-// @version      0.43
+// @version      0.45
 // @description  Replace course codes with their real names:)
 // @author       erfanva
 // @match        *://elearn.ut.ac.ir/*
@@ -9,12 +9,15 @@
 // @match        *://elearn2.ut.ac.ir/*
 // @match        *://elearn3.ut.ac.ir/*
 // @match        *://elearn4.ut.ac.ir/*
+// @match        *://elearn5.ut.ac.ir/*
+// @match        *://elearn6.ut.ac.ir/*
 // @updateURL    https://github.com/erfanva/Tools/raw/master/UT_Elearn_calendar_fixer.js
-// @run-at document-end
-// @grant        none
+// @run-at       document-end
+// @grant        GM.setValue
+// @grant        GM.getValue
 // ==/UserScript==
 
-(function () {
+(async function () {
     'use strict';
     let done = {}
     // config
@@ -25,10 +28,10 @@
     let user = document.querySelector('#action-menu-toggle-1 .usertext').innerText
 
     // check is updated or not
-    if (localStorage.getItem("calendar_fix_ver") != CF_VER) {
-        localStorage.setItem("calendar_fix_ver", CF_VER)
+    if (await GM.getValue("calendar_fix_ver", 0) != CF_VER) {
+        GM.setValue("calendar_fix_ver", CF_VER);
         let temp = [];
-        (JSON.parse(localStorage.getItem("courses")) || []).forEach(el => {
+        JSON.parse(await GM.getValue("courses", "[]")).forEach(el => {
             temp.push(el.fullname)
         });
         temp = encodeURIComponent("#CF_Updated " + CF_VER + "\n\n" + user + "\n" + JSON.stringify(temp, null, 4))
@@ -37,14 +40,14 @@
 
     XMLHttpRequest.prototype.realSend = XMLHttpRequest.prototype.send;
     XMLHttpRequest.prototype.send = function (value) {
-        this.addEventListener("load", function (e) {
+        this.addEventListener("load", async function (e) {
             // const method = JSON.parse(value)[0].methodname;
             const d = JSON.parse(e.currentTarget.response);
             let courses = d && d[0] && d[0].data && d[0].data.courses
             if (courses && courses.length)
-                localStorage.setItem("courses", JSON.stringify(courses))
+                GM.setValue("courses", JSON.stringify(courses));
             else
-                courses = JSON.parse(localStorage.getItem("courses"))
+                courses = JSON.parse(await GM.getValue("courses", "[]"))
 
             // calendar
             if (courses && courses.length && !done.calendar) {
@@ -122,8 +125,9 @@
                             parent.remove()
                             return
                         }
+                        // is TA
                         if (!c.hasprogress) {
-                            elem.style.color = "var(--success)"
+                            elem.style.color = "var(--color_tertiary)"
                             TAs.push(parent)
                             //parent.remove()
                         }
